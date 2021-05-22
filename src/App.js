@@ -1,80 +1,59 @@
-import React,{useEffect, useState}  from 'react'
+import React, {useState,useEffect} from 'react'
+import blank from './img/blank.png'
+import snake from  './img/snake.png'
+import './App.css'
+export default function App() {
+ 
+  let dim= 10
+  
+  let initialArr = Array.from( {length:dim}, (element, index, array)  => 
+                                Array.from( {length:dim}, (sE,sI,sA)=> 
+                                  ({x:index,y:sI})     
+  ))
 
-const SnakeBoard = () => {
-  const [rows, setRows] = useState([]);
-  const [snake, setSnake] = useState([{ x: 0, y: 0 }, { x: 1, y: 0 }]);
+ const[selectedSnake, setSelectedSnake] = useState([{x:0,y:0}, {x:0,y:1}])
+ 
+ selectedSnake.findIndex( item =>{
+   //console.log(item)
+   return false 
+ })
 
-  useEffect(()=> {
-    const width = 10;
-    const height = 10;
-    let initialRows = [];
-    for (let i = 0; i < height; i++) {
-      initialRows.push("blank ".repeat(width).trim().split(' '));
-    }
-    for (let i = 0; i < snake.length; i++) { 
-      initialRows[snake[i].y][snake[i].x] ="snake";
-    }
-    setRows(initialRows)
-  }, [snake])
+ const getHtml = () => {    
+   return initialArr.map( (rootItem) =>{
+     // console.log(rootItem)
 
+      return (<div>
+       {
+          rootItem.map( ({x,y}) => {  
+                      
+              return (
+                selectedSnake.findIndex( 
+                  // show that sX and sY wont work because its destructuring 
+                  (selItem) => {                     
+                   return selItem.x ===x && selItem.y ===y
+                  }
+               ) !==-1
+               )? <img src={snake}></img>:<img src={blank}></img>
+                
+            } 
+            )
+       }
+      </div>)
+
+    })
+    
+
+ }
+  
   useEffect(() => {
-    const changeDirectionWithKeys = (e) => {
-      e.preventDefault();
-      const { key } = e;
-      // cut tail and push new head
-      const [tail, ...newSnake] = snake.length > 1 ? snake : [null, ...snake]  ;
-      const head = snake[snake.length-1]
-        switch (key) {
-        case "ArrowRight":
-          newSnake.push({ x: head.x + 1 , y: head.y }); // fix
-          break;
-        case "ArrowLeft":
-          newSnake.push({ x: head.x - 1 , y: head.y }); // fix
-          break;
-        case "ArrowUp":
-          newSnake.push({ x: head.x, y: head.y - 1 }); // fix
-          break;
-        case "ArrowDown":
-          newSnake.push({ x: head.x, y: head.y + 1  }); // fix
-          break;
-        default:
-          break;  
-      }
-      setSnake(newSnake);
-    };
+         return () => {     
+    }
+  }, [selectedSnake])
 
-    window.addEventListener("keydown", changeDirectionWithKeys);
-    return () => {
-      window.removeEventListener("keydown", changeDirectionWithKeys);
-    };
-  }, [snake]);
-
-  const diplayRows = rows.map((row, index) => (
-    <li key={index}>
-      {row.map((e, ind) => {
-        let cell = null
-        switch (e) {
-          case "blank":
-            cell = <span key={ind}> .|</span>;
-            break;
-          case "snake":
-            cell = <span key={ind}> s|</span>;
-            break;
-          default:
-            break;  
-        }
-        return cell;
-      })}
-    </li>
-  ));
-
+ let html =""
   return (
     <div>
-      <ul>
-        {diplayRows}
-      </ul>
+    { getHtml()}
     </div>
-  );
-};
-
-export default SnakeBoard;
+  )
+}
