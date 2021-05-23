@@ -1,10 +1,9 @@
 import React, {useState,useEffect} from 'react'
 import blank from './img/blank.png'
 import snake from  './img/snake.png'
-import './App.css'
 export default function App() {
  
-  const dim= 20
+  const dim= 10
   
   let initialArr = Array.from( {length:dim}, (element, index, array)  => 
                                 Array.from( {length:dim}, (sE,sI,sA)=> 
@@ -16,8 +15,8 @@ export default function App() {
  const[selectedSnake, setSelectedSnake] = useState([{x:0,y:0}, {x:0,y:1},{x:0,y:2}])
  
  const getHtml = () => {    
-   return initialArr.map( (rootItem) =>{
-      return (<div>
+   return initialArr.map( (rootItem,index) =>{
+      return (<div key={`div-${index}`}>
        {
           rootItem.map( ({x,y}) => {  
                       
@@ -28,7 +27,7 @@ export default function App() {
                    return selItem.x ===x && selItem.y ===y
                   }
                ) !==-1
-               )? <img src={snake}></img>:<img src={blank}></img>
+               )? <img  alt="snake img" key={`${x}-${y}-snake`} src={snake}></img>:<img  alt="blank img" key={`${x}-${y}-blank`} src={blank}></img>
                 
             } 
             )

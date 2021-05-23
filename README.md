@@ -4,8 +4,8 @@ Based on these arrows we redraw the square and it looks like a snake moving
 
 Learning objective: we learn useEffect, Array methods, map, findIndex etc
 Full credit to : https://dev.to/aligumustosun/making-a-snake-game-using-react-hooks-5606
-Twitter :  https://twitter.com/aligumust3
-github :
+Twitter :  https://twitter.com/aligumust3 : Gümüş ama paslandı
+github : https://github.com/techakki81/react-snakeboard
 
 
 steps
