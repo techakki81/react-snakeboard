@@ -13,6 +13,9 @@ const SnakeBoard = () => {
     for (let i = 0; i < height; i++) {
       initialRows.push("blank ".repeat(width).trim().split(' '));
     }
+    
+    console.log(initialRows)
+
     for (let i = 0; i < snake.length; i++) { 
       initialRows[snake[i].y][snake[i].x] ="snake";
     }
