@@ -1,4 +1,0 @@
-img:nth-child(10n)::after{
-  content: "\A";
-  white-space: pre;
-}
