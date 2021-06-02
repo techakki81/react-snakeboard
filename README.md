@@ -15,3 +15,4 @@ steps
 catch phrase 
 Live coding session...React Snakes and Bollywood
 its blasphameous to change react state directly. Always use the function :alien: :alien:
+cutting edge of react perfornabce
